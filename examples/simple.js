@@ -46,10 +46,18 @@ MyParser.prototype.word = function word(token, type, next) {
 };
 
 // entry point
-var str1 = "2 coucou salut \n\t 3 bonjour bonsoir";
-var str2 = " hello";
+var file = process.argv[2];
+if(!file) file = __dirname+'/simple.txt';
+
+var fs = require('fs');
+var ss = fs.createReadStream(file);
+ss.setEncoding('utf8');
 
 var p = new MyParser();
 
-p.write(str1);
-p.end(str2);
+ss.on('data', function(data) {
+    p.write(data);
+});
+ss.on('end', function() {
+    p.end();
+});
