@@ -58,11 +58,25 @@ Handlers are just javascript functions accepting the following arguments
 returning `true` from a handler causes the same token to be reemitted
 to the next handler.
 
+### Handlers utilities
+there are a few handlers factories provided by this module.
+
+* `checkType(type)` returns a handler that only checks the type of the
+token without doing anything so the same token is pass down to the next
+handler
+* `expect(type)` returns a handler that checks for the specified type
+and consumes the token
+* `list(separator, element, end)` returns a handler expanding to the
+handlers needed to parse a list of elements able to be parsed by `element`
+and separated by tokens of type `separator`. The list should end by a
+token of type `end`
+
 # project
 ## TODOs
 * more robustness / better error handling
 * features requests
 * Support for asynchronous handlers
+* allow for complex separator an ending tokens for handler utilities
 
 ## Features requests / bugs
 If you'd like the parser to do something that it doesn't do or want to report
