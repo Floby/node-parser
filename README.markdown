@@ -25,26 +25,28 @@ functions _'handlers'_.
 This can be achieved through configuration of the basic parser or
 through inheritance.
     
-    var Parser = require('parser');
-    var util = require('util');
-    var MyTokenizer = require('./MyTokenizer');
+``` javascript
+var Parser = require('parser');
+var util = require('util');
+var MyTokenizer = require('./MyTokenizer');
 
-    function MyParser() {
-        // MyTokenizer is the tokenizer we configured
-        // but it's not the subject of this module
-        Parser.apply(this, new MyTokenizer());
+function MyParser() {
+    // MyTokenizer is the tokenizer we configured
+    // but it's not the subject of this module
+    Parser.apply(this, new MyTokenizer());
 
-        // override the default behaviour
-        this.defaultHandler(this.default);
+    // override the default behaviour
+    this.defaultHandler(this.default);
 
-        // specify the function that will be called on the first token
-        this.initialHander(this.initial);
-    }
-    util.inherits(MyParser, Parser);
+    // specify the function that will be called on the first token
+    this.initialHander(this.initial);
+}
+util.inherits(MyParser, Parser);
 
-    /**
-     * Of course you will have to define these functions somewhere
-     */
+/**
+ * Of course you will have to define these functions somewhere
+ */
+```
 
 This is very theoretic but you can have a look at what is in the example 
 folder
