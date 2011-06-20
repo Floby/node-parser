@@ -58,8 +58,17 @@ Handlers are just javascript functions accepting the following arguments:
 * `type` the type of this token (i.e. `'number'`, `'whitespace'`, `'word'`)
 * `next` a function to specify what needs to be called on the next token(s)
 
+the `next` function takes a random number of handlers which will be pushed
+in front of the handlers queue (they will be _next_!).
 returning `true` from a handler causes the same token to be reemitted
 to the next handler.
+
+This allows you to define handlers doing some kind of "sniffing" if you find
+yourself in a state in which you cannot determine what will come next.
+This kind of handlers _expand_ themselves to a greater number of handlers that
+will effectively parse the following tokens. They do that by adding a few handlers
+to the queue with `next` and returning `true` to notify the parser that the token
+should be reemitted.
 
 ### Handlers utilities
 there are a few handlers factories provided by this module.
