@@ -31,6 +31,9 @@ util.inherits(MyParser, Parser);
 
 MyParser.prototype.number = function number(token, type, next) {
     //console.log('current queue in number', this._queue);
+    if(type === 'eof')
+      return console.log('done');
+
     assert.equal(type, 'number', "unexpected token "+token+"("+type+"). expecting number");
     var nb = parseInt(token);
     for (var i = 0; i < nb; ++i) {
