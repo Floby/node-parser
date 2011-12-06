@@ -1,7 +1,7 @@
 var Tokenizer = require('tokenizer');
 var Parser = require('../lib/Parser.js');
 var assert = require('assert');
-var sys = require('sys');
+var util = require('util');
 
 /**
  * in this example we create a parser that reads a number then reads the
@@ -27,10 +27,13 @@ function MyParser () {
                                      // the 'default handler' method
     this.defaultHandler(this.number);
 }
-sys.inherits(MyParser, Parser);
+util.inherits(MyParser, Parser);
 
 MyParser.prototype.number = function number(token, type, next) {
     //console.log('current queue in number', this._queue);
+    if(type === 'eof')
+      return console.log('done');
+
     assert.equal(type, 'number', "unexpected token "+token+"("+type+"). expecting number");
     var nb = parseInt(token);
     for (var i = 0; i < nb; ++i) {
