@@ -14,7 +14,7 @@ These concepts are very different and that is why they are implemented
 separately. The easiest solution is to use my [tokenizer](http://github.com/floby/node-tokenizer)
 
 
-## parser
+### parser
 The default behaviour upon receiving a new token is ignoring it. It prints
 a warning when reaching EOF with the number of tokens that have been ignored.
 However this is probably not what you want to do!
